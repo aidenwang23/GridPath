@@ -4,6 +4,7 @@ public class GridPath
      * Initialized in the constructor with distinct values that never change
      */
     private int[][] grid;
+    private int sum;
 
     /**
      * Returns the Location representing a neighbor of the grid element at row
@@ -13,7 +14,7 @@ public class GridPath
      */
     public Location getNextLoc(int row, int col) 
     {
-        /* to be implemented in part (a) */ 
+        return(new Location(row, col));
     }
 
     /**
@@ -24,6 +25,6 @@ public class GridPath
      */
     public int sumPath(int row, int col) 
     {
-        /* to be implemented in part (b) */ 
+        return sum;
     }
 }
