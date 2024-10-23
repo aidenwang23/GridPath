@@ -1,3 +1,6 @@
+
+import java.net.InterfaceAddress;
+
 public class GridPath 
 {
     /**
@@ -32,23 +35,12 @@ public class GridPath
      */
     public Location getNextLoc(int row, int col) 
     {
-        int belowElement = 999;
-        int rightElement = 999;
-        if(row+1 <= grid.length)
-        {
-            rightElement = grid[row+1][col];
-        }
-        if(col+1 <= grid[0].length)
-        {
-            belowElement = grid[row][col+1];
-        }
-        if(belowElement < rightElement){
-            return(new Location(row+1,col));
-        }
-        if(rightElement < belowElement){
-            return(new Location(row,col+1));
-        }
-        return null;
+        int below = Integer.MAX_VALUE;
+        if (row < grid.length - 1) below = grid[row+1][col];
+        int right = Integer.MAX_VALUE;
+        if (col < grid[0].length - 1) right = grid[row][col+1];
+        if(below<right) return new Location(row+1, col);
+        else return new Location(row, col+1);
     }
 
     /**
@@ -59,8 +51,14 @@ public class GridPath
      */
     public int sumPath(int row, int col) 
     {
-        int sum = 0;
-
+        int sum = grid[row][col];
+        while(row < grid.length - 1 || col < grid[0].length - 1)
+        {
+            Location loc = getNextLoc(row, col);
+            row = loc.getRow();
+            col = loc.getCol();
+            sum += grid[row][col];
+        }
         return sum;
     }
 }
